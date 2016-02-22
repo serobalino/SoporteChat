@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Configuration</title>
+
+        <!-- Fonts -->
+
+        <?php echo $app->renderView('blocks/fonts.html'); ?>
+
+        <!-- Styles -->
+
+        <link rel="stylesheet" href="<?php echo $app->asset('css/jquery.mCustomScrollbar.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/framework.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/main.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/admin.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/bootstrap.css') ?>" />
+    </head>
+    <body class="install-wizard">
+
+        <img class="logo" src="<?php echo $app->asset('img/logo.png') ?>">
+        
+        <div class="panel">
+
+            <div class="header">Configuration</div>
+
+            <div class="content">
+                
+                <!-- Introduction -->
+                
+                <p class="intro">
+                    Welcome to PHP LiveChat. Before getting started, application needs to be configured to
+                    play along with your database server. You will need the following information during
+                    installation (if you don't know those items, you can get them from your web hosting company):
+
+                    <br><br>
+                    
+                    1. Database host <br>
+                    2. Database port number (only if other than the default one) <br>
+                    3. Database name <br>
+                    4. Database username <br>
+                    5. Database password
+                    
+                    <br><br>
+                    
+                    <strong>
+                        If the given database doesn't exist yet, the installation wizard will try to automatically create it
+                        for you. On some servers, however, this attempt will fail. Don't worry, though — just create the database
+                        manually using your favorite database administration tool (e. g. <i>phpMyAdmin</i>) and come back to this page
+                        after it is done.
+                    </strong>
+                </p>
+                
+                <!-- Actions -->
+
+                <div class="row buttons">
+                    <div class="col6">
+                        <a class="btn secondary" href="<?php echo $app->path('Admin:index') ?>">
+                            <i class="icon-remove-sign icon-white"></i>
+                            Cancel
+                        </a>
+                    </div>
+
+                    <div class="col6">
+                        <a class="btn" href="<?php echo $app->path('Install:wizard') ?>">
+                            Let's go!
+                            <i class="icon-circle-arrow-right icon-white"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>

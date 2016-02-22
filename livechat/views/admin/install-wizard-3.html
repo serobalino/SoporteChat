@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Installation completed</title>
+
+        <!-- Fonts -->
+
+        <?php echo $app->renderView('blocks/fonts.html'); ?>
+
+        <!-- Styles -->
+
+        <link rel="stylesheet" href="<?php echo $app->asset('css/jquery.mCustomScrollbar.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/framework.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/main.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/admin.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/bootstrap.css') ?>" />
+    </head>
+    <body class="install-wizard">
+
+        <img class="logo" src="<?php echo $app->asset('img/logo.png') ?>">
+
+        <div class="panel">
+
+            <div class="header">Installation completed</div>
+
+            <div class="content">
+
+                <!-- Introduction -->
+
+                <p class="intro success">
+                    Installation has been completed successfully! You can now follow to the administration panel.
+                </p>
+
+                <!-- Actions -->
+
+                <div class="row buttons">
+                    <a class="btn" href="<?php echo $app->path('Admin:index') ?>">
+                        Admin panel
+                        <i class="icon-circle-arrow-right icon-white"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>

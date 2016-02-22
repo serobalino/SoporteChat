@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Uninstallation</title>
+
+        <!-- Fonts -->
+
+        <?php echo $app->renderView('blocks/fonts.html'); ?>
+
+        <!-- Styles -->
+
+        <link rel="stylesheet" href="<?php echo $app->asset('css/jquery.mCustomScrollbar.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/framework.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/main.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/admin.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/bootstrap.css') ?>" />
+    </head>
+    <body class="install-wizard">
+
+        <div class="panel">
+
+            <div class="header">Uninstallation</div>
+
+            <div class="content">
+
+                <!-- Introduction -->
+
+                <p class="intro">
+                    This is the uninstallation page. If you no longer wish to use the application, continue by
+                    clicking the <i>Uninstall</i> button.
+
+                    <br><br>
+
+                    Uninstalling means that operator accounts, messages history and canned messages will be removed. The administrator account,
+                    however, will remain available and you can sign in again later. Database tables will be removed, but the database
+                    itself will still exist (you might want to remove it manually, if needed).
+
+                    <br><br>
+
+                    <strong>
+                        After uninstallation process is done, all application's data (operator accounts, messages history, canned messages) will be lost.
+                        If necessary, before uninstalling, you can backup application database tables using your favorite database administration tool (e. g. <i>phpMyAdmin</i>).
+                    </strong>
+                </p>
+
+                <?php if(isset($vars['errorMsg'])) { ?>
+                <p class="error">
+                    Something went wrong during the uninstallation. Error message returned from the application was:
+                </p>
+
+                <p class="error">
+                    <?php echo $vars['errorMsg'] ?>
+                </p>
+                <?php } ?>
+
+                <!-- Actions -->
+
+                <div class="row buttons">
+                    <div class="col6">
+                        <a class="btn secondary" href="<?php echo $app->path('Admin:index') ?>">
+                            <i class="icon-remove-sign icon-white"></i>
+                            Cancel
+                        </a>
+                    </div>
+
+                    <div class="col6">
+                        <form action="<?php echo $app->path('Install:uninstall2') ?>" method="post">
+                            <button type="submit" class="btn danger">
+                                Uninstall
+                                <i class="icon-circle-arrow-right icon-white"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </body>
+</html>

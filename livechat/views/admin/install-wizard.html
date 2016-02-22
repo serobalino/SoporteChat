@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Configuration</title>
+
+        <!-- Fonts -->
+
+        <?php echo $app->renderView('blocks/fonts.html'); ?>
+
+        <!-- Styles -->
+
+        <link rel="stylesheet" href="<?php echo $app->asset('css/jquery.mCustomScrollbar.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/framework.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/main.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/admin.css') ?>" />
+        <link rel="stylesheet" href="<?php echo $app->asset('css/bootstrap.css') ?>" />
+    </head>
+    <body class="install-wizard">
+
+        <img class="logo" src="<?php echo $app->asset('img/logo.png') ?>">
+
+        <div class="panel">
+
+            <div class="header">Configuration</div>
+
+            <div class="content">
+
+                <!-- Introduction -->
+
+                <p class="intro">
+                    The following settings are the base configuration of the whole application.
+                    They are used to communicate with your database and define administrator user's account.
+                    Please fill the forms and continue by clicking <i>Save</i>.
+
+                    <br><br>
+
+                    <strong>
+                        If the given database doesn't exist yet, the installation wizard will try to automatically create it
+                        for you. On some servers, however, this attempt will fail. Don't worry, though — just create the database
+                        manually using your favourite database administration tool (e.g. <i>phpMyAdmin</i>) and come back to this page
+                        after it is done.
+
+                        <br><br>
+
+                        If you already installed the application and just want to change some of the settings, feel
+                        free to update the values and click <i>Save</i> (existing database will stay safe and untouched).
+                    </strong>
+                </p>
+
+                <?php if(isset($vars['errors'])) { ?>
+                <p class="error">
+                    Your input data seems to be invalid, please check the error messages below and update the form.
+                </p>
+                <?php } ?>
+
+                <?php if(isset($vars['notWritable'])) { ?>
+                <p class="error">
+                    The application requires some of the files to be writable by PHP. The following are currently not writable:
+                    <br><br>
+                    <?php foreach($vars['notWritable'] as $path => $type) { ?>
+                        - <b><?php echo $path ?></b> <?php echo ($type == 'dir' ? 'directory' : 'file') ?><br>
+                    <?php } ?>
+                    <br><br>
+                    Please update those files/directories permissions making them writable and come back after it is done.
+                </p>
+                <?php } ?>
+
+                <?php if(isset($vars['dbError'])) { ?>
+                <p class="error">
+                    The application couldn't connect to the given database.<br>
+                    Please double check all of the values in the <i>Database settings</i> section and make sure your database is running.
+                </p>
+                <?php } ?>
+
+                <?php if(isset($vars['dbCreateError'])) { ?>
+                <p class="error">
+                    Attempt to create database and tables failed.<br>
+                    Please double check all of the values in the <i>Database settings</i> section.
+
+                    <br><br>
+
+                    If your database — <?php echo $vars['config']['dbName'] ?> — doesn't exist yet, please create it
+                    manually using your favorite database administration tool (e. g. <i>phpMyAdmin</i>) and come back after it is done.
+
+                    <br><br>
+
+                    Internal error message was: <?php echo $vars['message'] ?>
+                </p>
+                <?php } ?>
+
+                <form action="<?php echo $app->path('Install:wizard2') ?>" method="post">
+
+                    <!-- Database settings -->
+
+                    <h2>Database settings</h2>
+
+                    <div class="section">
+
+                        <div class="row">
+                            <div class="col3"><label>Host</label></div>
+                            <div class="col9">
+                                <input type="text" name="config[dbHost]" value="<?php echo $vars['config']['dbHost'] ?>">
+                                <?php if(isset($vars['errors']['dbHost'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['dbHost'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Port</label></div>
+                            <div class="col9">
+                                <input type="text" name="config[dbPort]" value="<?php echo $vars['config']['dbPort'] ?>">
+                                <?php if(isset($vars['errors']['dbPort'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['dbPort'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Database name</label></div>
+                            <div class="col9">
+                                <input type="text" name="config[dbName]" value="<?php echo $vars['config']['dbName'] ?>">
+                                <?php if(isset($vars['errors']['dbName'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['dbName'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Username</label></div>
+                            <div class="col9">
+                                <input type="text" name="config[dbUser]" value="<?php echo $vars['config']['dbUser'] ?>">
+                                <?php if(isset($vars['errors']['dbUser'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['dbUser'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Password</label></div>
+                            <div class="col9">
+                                <input type="password" name="config[dbPassword]" value="<?php echo $vars['config']['dbPassword'] ?>">
+                                <?php if(isset($vars['errors']['dbPassword'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['dbPassword'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- SMTP settings -->
+
+                    <h2>SMTP</h2>
+
+                    <div class="section">
+
+                        <p class="intro">
+                            This section allows you to use external SMTP server for sending emails. You can leave SMTP settings untouched
+                            to use the default email server.
+                        </p>
+
+                        <div class="row">
+                            <div class="col3"><label>Use SMTP</label></div>
+                            <div class="col9">
+                                <input type="checkbox" name="config[services][mailer][smtp]" <?php echo $vars['config']['services']['mailer']['smtp'] == true ? 'checked="checked"' : '' ?> />
+                                <?php if(isset($vars['errors']['services']['mailer']['smtp'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['services']['mailer']['smtp'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Encryption</label></div>
+                            <div class="col9">
+                                <input type="text" name="config[services][mailer][smtpSecure]" value="<?php echo $vars['config']['services']['mailer']['smtpSecure'] ?>">
+                                <?php if(isset($vars['errors']['services']['mailer']['smtpSecure'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['services']['mailer']['smtpSecure'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Host(s), separate with ;</b></label></div>
+                            <div class="col9">
+                                <input type="text" name="config[services][mailer][smtpHost]" value="<?php echo $vars['config']['services']['mailer']['smtpHost'] ?>">
+                                <?php if(isset($vars['errors']['services']['mailer']['smtpHost'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['services']['mailer']['smtpHost'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Port</label></div>
+                            <div class="col9">
+                                <input type="text" name="config[services][mailer][smtpPort]" value="<?php echo $vars['config']['services']['mailer']['smtpPort'] ?>">
+                                <?php if(isset($vars['errors']['services']['mailer']['smtpPort'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['services']['mailer']['smtpPort'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>User</label></div>
+                            <div class="col9">
+                                <input type="text" name="config[services][mailer][smtpUser]" value="<?php echo $vars['config']['services']['mailer']['smtpUser'] ?>">
+                                <?php if(isset($vars['errors']['services']['mailer']['smtpUser'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['services']['mailer']['smtpUser'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Password</label></div>
+                            <div class="col9">
+                                <input type="password" name="config[services][mailer][smtpPass]" value="<?php echo $vars['config']['services']['mailer']['smtpPass'] ?>">
+                                <?php if(isset($vars['errors']['services']['mailer']['smtpPass'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['services']['mailer']['smtpPass'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Admin user settings -->
+
+                    <h2>Administrator account settings</h2>
+
+                    <div class="section">
+
+                        <div class="row">
+                            <div class="col3"><label>Username</label></div>
+                            <div class="col9">
+                                <input type="text" name="config[superUser]" value="<?php echo $vars['config']['superUser'] ?>">
+                                <?php if(isset($vars['errors']['superUser'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['superUser'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Password</label></div>
+                            <div class="col9">
+                                <input type="password" name="config[superPass]">
+                                <?php if(isset($vars['errors']['superPass'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['superPass'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3"><label>Password repeat</label></div>
+                            <div class="col9">
+                                <input type="password" name="config[superPassRepeat]">
+                                <?php if(isset($vars['errors']['superPassRepeat'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['superPassRepeat'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Other settings -->
+
+                    <h2>Other settings</h2>
+
+                    <div class="section">
+
+                        <div class="row">
+                            <div class="col3"><label>Contact form email</label></div>
+                            <div class="col9">
+                                <input type="text" name="config[appSettings][contactMail]" value="<?php echo $vars['config']['appSettings']['contactMail'] ?>">
+                                <?php if(isset($vars['errors']['appSettings']['contactMail'])) { ?>
+                                    <p class="error"><?php echo $vars['errors']['appSettings']['contactMail'][0] ?></p>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Actions -->
+
+                    <div class="row buttons">
+                        <div class="col6">
+                            <a class="btn secondary" href="<?php echo $app->path('Admin:index') ?>">
+                                <i class="icon-remove-sign icon-white"></i>
+                                Cancel
+                            </a>
+                        </div>
+
+                        <div class="col6">
+                            <button class="btn" type="submit">
+                                Save
+                                <i class="icon-circle-arrow-right icon-white"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </body>
+</html>

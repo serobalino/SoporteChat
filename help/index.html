@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>PHP Live Chat - Tutorial</title>
+
+        <link rel="stylesheet" type="text/css" href="inc/css/gumby.css">
+        <link rel="stylesheet" type="text/css" href="inc/css/style.css">
+
+        <script type="text/javascript" src="inc/jquery.min.js"></script>
+        <script type="text/javascript" src="inc/js/libs/modernizr-2.6.2.min.js"></script>
+        <script type="text/javascript" src="inc/js/jquery.highlight.js"></script>
+        <script type="text/javascript" src="inc/gumby.min.js"></script>
+        <script type="text/javascript">
+            jQuery(function($)
+            {
+                $('.skip').click(function()
+                {
+                    $($(this).attr('gumby-goto')).highlight();
+                });
+            });
+        </script>
+        
+        <style type="text/css">
+            span.label
+            {
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            <div id="logo"></div>
+        </div>
+        <div class="row">
+            <div id="nav-holder" class="two columns">
+                <nav gumby-fixed="top">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#requirements"><strong>System Requirements</strong></a></li>
+                        <li><a href="#video"><strong>Video Tutorial <i class="icon-video"></i></strong></a></li>
+                        <li><a href="#installation"><strong>Installation</strong></a>
+                            <ul>
+                                <li><a href="#installation">General</a></li>
+                                <li><a href="#uninstallation">Uninstallation</a></li>
+                                <li><a href="#wp-installation">WordPress</a></li>
+                                <li><a href="#joomla-installation">Joomla</a></li>
+                                <li><a href="#drupal-installation">Drupal</a></li>
+                                <li><a href="#opencart-installation">OpenCart</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li><a href="#usage"><strong>Usage</strong></a>
+                            <ul>
+                                <li><a href="#usage-login">Logging in</a></li>
+                                <li><a href="#usage-logout">Logging out</a></li>
+                                <li><a href="#usage-global">Global settings</a></li>
+                                <li><a href="#usage-themes">Widget themes</a></li>
+                                <li><a href="#usage-widget-preview">Widget preview</a></li>
+                                <li><a href="#usage-operators">Operators</a></li>
+                                <li><a href="#usage-chatting">Chatting</a></li>
+                                <li><a href="#guest-chatting">Guest chatting</a></li>
+                                <li><a href="#usage-canned">Canned messages</a></li>
+                                <li><a href="#usage-history">History</a></li>
+                                <li><a href="#usage-avatars">Adding more predefined avatars</a></li>
+                                <li><a href="#usage-sound">Adding more message notification sounds</a></li>
+                                <li><a href="#usage-jsapi">JavaScript API</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="ten columns">
+                <ul>
+                    <li>
+                        <h2 id="requirements">System Requirements</h2>
+                        
+                        <p>
+                            For the application to function correctly PHP version 5 or newer is required and a MySQL 5.2 or newer database.
+                            Browsers starting with IE8 and newer are supported.
+                        </p>
+                    </li>
+                    <li>
+                        <h2 id="video">Video Tutorial <i class="icon-video"></i></h2>
+                        
+                        <p>
+                            Please follow this link: <a href="https://www.youtube.com/watch?v=23A_JVwN0IQ" target="_blank">https://www.youtube.com/watch?v=23A_JVwN0IQ</a>
+                            to see a YouTube video showing how to install the chat on HTML website. For more details refer to next sections of this documentation.
+                        </p>
+                    </li>
+                    <li>
+                        <h2 id="installation">Installation</h2>
+
+                        <p>Instructions for installation are also available in the <a href="https://www.youtube.com/watch?v=23A_JVwN0IQ" target="_blank">Video Tutorial <i class="icon-video"></i></a>.</p>
+                        
+                        <p>
+                            After downloading all the files, copy and upload the <code>livechat</code> directory anywhere on your web server (for example
+                            to the root directory of your website). <code>livechat</code> folder contains all of the necessary files (configuration, scripts, data and resources).
+                        </p>
+                        <p>
+                            If you're using a CMS system or shoping software (like WordPress, Joomla, etc.) copy this folder to the root directory of your CMS.
+                        </p>
+
+                        <h3>Update file permissions</h3>
+                        
+                        <span class="label success">This section is only important if your web server doesn't allow PHP to access/edit files by default.</span>
+                        
+                        <p>
+                            The following files/directories should be both readable and writable by PHP:
+                            <ul>
+                                <li>whole <code>/data</code> folder,</li>
+                                <li>whole <code>/upload</code> folder + its subfolders,</li>
+                                <li><code>/php/config/app.settings.php</code> file,</li>
+                                <li><code>/php/config/parameters.php</code> file.</li>
+                            </ul>
+                        </p>
+                        
+                        <h3>Run installation wizard</h3>
+                        <p>Visit the following URL:</p>
+                        <p><code>&lt;your_web_server_url&gt;/&lt;livechat_dir&gt;/php/app.php</code></p>
+                        <p>When application is accessed for the first time, you will be redirected to the installation wizard:</p>
+                        <div class="browser">
+                            <img src="inc/img/install-1.png">
+                        </div>
+                        <p>Following the instruction, click <code>Let's go!</code>. The below page will be displayed next:</p>
+                        <div class="browser">
+                            <img src="inc/img/install-2.png">
+                        </div>
+                        <p>Fill the form with your settings and click <code>Save</code>. The next page will be:</p>
+                        <div class="browser">
+                            <img src="inc/img/install-3.png">
+                        </div>
+                        <p>Here, check your submitted data and confirm using the <code>Install</code> button. If everything went well, the final page will be displayed:</p>
+                        <div class="browser">
+                            <img src="inc/img/install-4.png">
+                        </div>
+                        
+                        <h3>Add chat widget to your web page</h3>
+                        
+                        <p>
+                            Now you're ready to embed the chat widget on your website. To do that you have to add a special line of code in your main HTML document/layout.
+                            To get this code snippet go back to admin panel (<code>&lt;your_web_server_url&gt;/&lt;livechat_dir&gt;/php/app.php?login</code>) and select <code>Get widget script</code> from the top right menu. This will display a message dialog
+                            with the code to copy:
+                        </p>
+                        
+                        <div class="browser">
+                            <img src="inc/img/embedding-code.png">
+                        </div>
+                        
+                        <p>
+                            Paste it in the <code>head</code> section of your website or at the end of the <code>body</code> tag and that's all. This script will load all the
+                            dependencies and add the chat widget at the bottom right corner of your website. Now, when you visit the site, it should show the widget with
+                            contact form displayed in it (as no operators are available on-line yet).
+                        </p>
+                    </li>
+                    <li>
+                        <h2 id="uninstallation">Uninstallation</h2>
+
+                        <p>
+                            You can uninstall the application from the server using the uninstallation page. Just select <code>Uninstall</code> from the top right menu.
+                            The following page will be displayed:
+                        </p>
+                        <div class="browser">
+                            <img src="inc/img/uninstall-1.png">
+                        </div>
+                        <p>After clicking the <code>Uninstall</code> button, the application will be uninstalled and you will see the following message:</p>
+                        <div class="browser">
+                            <img src="inc/img/uninstall-2.png">
+                        </div>
+                    </li>
+                    <li>
+                        <h2 id="wp-installation">WordPress Installation</h2>
+                        
+                        <p>
+                            To install the chat on a WordPress website follow the same steps described above for usual installation. Only remember at the last step
+                            that the chat widget should be embedded in the main layout file (so it's available in any section of the website). To make this task
+                            simple for you, you can use the <code>Per page add to head</code> WordPress plugin (<a href="http://wordpress.org/plugins/per-page-add-to/" target="_blank">http://wordpress.org/plugins/per-page-add-to/</a>),
+                            which allows you to insert additional content to the <code>head</code> section of your website. After installing the plugin and turning it on,
+                            go to <code>Settings/Add &lt;head&gt; to every page</code> in you WP admin panel, paste the widget embedding snippet (look at the previous section
+                            to see where to get it from) into the text area and click <code>Save</code>. Next time you visit any page of your WordPress site, the widget
+                            should be visible in its bottom right corner.
+                        </p>
+                    </li>
+                    <li>
+                        <h2 id="joomla-installation">Joomla Installation</h2>
+                        
+                        <p>
+                            To install the chat on a Joomla website follow the same steps described above for usual installation. Only remember at the last step
+                            that the chat widget should be embedded in the main layout file (so it's available in any section of the website). To make this task
+                            simple for you, you can use the <code>EasyScript</code> Joomla plugin (<a href="http://extensions.joomla.org/extensions/core-enhancements/coding-a-scripts-integration/head-code/11936" target="_blank">http://extensions.joomla.org/extensions/core-enhancements/coding-a-scripts-integration/head-code/11936/</a>),
+                            which allows you to insert additional content to the <code>head</code> section of your website. After installing the plugin and turning it on,
+                            go to <code>Extensions/Plugin Manager</code>, select EasyScript plugin from the list in, display the <code>Other</code> tab in its settings and
+                            paste the widget embedding snippet (look at the previous section to see where to get it from) into the <code>Additional items</code> text area.
+                            Finally click the <code>Save</code> button. Next time you visit any page of your Joomla site, the widget should be visible in its bottom right corner.
+                        </p>
+                    </li>
+                    <li>
+                        <h2 id="drupal-installation">Drupal Installation</h2>
+
+                        <p>
+                            To install the chat on a Drupal website follow the same steps described above for usual installation. Only remember at the last step
+                            that the chat widget should be embedded in the main layout file (so it's available in any section of the website). To make this task
+                            simple for you, you can use the <code>Add To Head</code> Drupal module (<a href="https://drupal.org/project/add_to_head" target="_blank">https://drupal.org/project/add_to_head</a>),
+                            which allows you to insert additional content to the <code>head</code> section of your website. After installing the module and turning it on,
+                            go to <code>Modules</code>, find Add to Head module on the list and click <code>Configure</code> next to it. In the window that displays choose
+                            <code>Add another profile</code>. The form will display. Name the entry however you'd like to and paste the widget embedding snippet (look at the
+                            previous section to see where to get it from) into the <code>Code</code> text area. You can also fill in the included/excluded path using the <code>Paths</code>
+                            text area and set the script to be placed in Head or Scripts section using the <code>Scope of addition</code> radio buttons (Scripts section will most
+                            probably be the best option). Finally click the <code>Save</code> button. Next time you visit any page of your Drupal site, the widget should be visible in its bottom right corner.
+                        </p>
+                    </li>
+                    <li>
+                        <h2 id="opencart-installation">OpenCart Installation</h2>
+
+                        <p>
+                            To install the chat on a Drupal website follow the same steps described above for usual installation. Only remember at the last step
+                            that the chat widget should be embedded in the main layout (so it's available in any section of the website). To make this task
+                            simple for you, you can use the <code>Add To Head</code> OpenCart module (<a href="http://www.opencart.com/index.php?route=extension/extension/info&extension_id=11171" target="_blank">http://www.opencart.com/index.php?route=extension/extension/info&extension_id=11171</a>),
+                            which allows you to insert additional content to the <code>head</code> section of your website. After installing the module and turning it on,
+                            go to <code>Extensions/Modules</code>, find Add to Head module on the list and click <code>Edit</code> next to it. In the page that displays click
+                            <code>Add Module</code> to create a file entry. The form will display. Select the <code>Javascript (js)</code> in the <code>File type</code> input and and paste <b>file path part</b>
+                            of the widget embedding snippet (look at the previous section to see where to get it from) into the <code>File path</code> text input. The <b>file path part</b> means
+                            you should only use the embedding snippet <code>src</code> attribute's value here (and not the whole widget snippet).
+                        </p>
+                        <p>
+                            For example, if the snippet looks like this:
+                        </p>
+                        <pre>&lt;script type="text/javascript" src="http://example.domain/livechat/php/app.php?widget-init.js"&gt;&lt;/script&gt;</pre>
+                        <p>
+                            You should only copy the <code>http://example.domain/livechat/php/app.php?widget-init.js</code> text and use it in the <code>Add to Head</code> configuration.
+                        </p>
+                        <p>
+                            After adding the first entry in the module, repeat the process adding additional entries for as many site sections you'd like the
+                            widget to appear on. First add the entry as previously described and after that select another page type from the <code>Layout</code>
+                            input. Add as many entries as there's layout types available (so the widget is present everywhere).
+                        </p>
+                        <p>
+                            Finally click the <code>Save</code> button. Next time you visit mentioned pages of your OpenCart website, the widget should be visible in the bottom right corner.
+                        </p>
+                    </li>
+                    <!--
+                    <li>
+                        <h2 id="concrete5-installation">Concrete5 Installation</h2>
+
+                        <p>
+                            To install the chat on a Concrete5 website follow the same steps described above for usual installation. Only remember that the
+                            chat widget should be embedded in your main layout. To add the widget to a page in Concrete5, login as admin visit any page and
+                            select <code>Properties</code> from the <code>Edit</code> menu. In the window that shows up select <code>Custom Attributes</code>
+                            tab and add a <code>Header Extra Content</code> attribute. In the text area of the attribute paste the widget embedding snippet
+                            (look at the previous section to see where to get it from) into the <code>Code</code> text area and click <code>Save</code>.
+                            Next time you visit any page of your Drupal site, the widget should be visible in its bottom right corner.
+                        </p>
+                    </li>
+                    -->
+                    <li>
+                        <h2 id="usage">Usage</h2>
+
+                        <p>
+                            There are 3 user types in the application: admin, operators and guests. Admin is the user that can run (un)installation, change global
+                            settings, manage operators and browse chatting history, but is not allowed to chat. Operators can chat with online guests and once
+                            at least a single operator logs in, chat widget won't display the contact form no more - guest login form will be displayed. Operators
+                            are also allowed to change their profile data and browse chat history. Guests are the visitors to your website that log in through
+                            the chat widget and talk with operators.
+                        </p>
+                        
+                        <h3 id="usage-login">Logging in</h3>
+                        
+                        <p>
+                            To login to the chat always use the <code>&lt;your_web_server_url&gt;/&lt;livechat_dir&gt;/php/app.php?login</code> path for both
+                            admin account and operator accounts. For admin account use <code>admin</code> (or other, if you changed the default name
+                            in the installation wizard) as the login and for operators use their e-mail addresses as the login.
+                        </p>
+                        
+                        <h3 id="usage-logout">Logging out</h3>
+                        
+                        <p>
+                            To log out from the chat open the top right menu and click the <code>Logout</code> item.
+                        </p>
+                        
+                        <h3 id="usage-global">Global settings</h3>
+                        
+                        <div class="browser">
+                            <img src="inc/img/global-settings.png">
+                        </div>
+                        
+                        <p>
+                            To change application settings log in using the admin account and go to the settings section using the wrench icon on the left.
+                            A form with multiple configuration options will be displayed, where you can update such options as: colors, contact e-mail,
+                            messages and labels translations, hide when offline feature, new message sound and maximum connections allowed. While most of the settings are
+                            self explanatory, the following two require a little clarification:
+                        </p>
+                        
+                        <ul style="list-style: circle;">
+                            <li><code>Hide when offline</code> - checking this option will cause the chat widget not to be shown in case no operator is available on-line.</li>
+                            <li><code>Show widget automatically</code> - defines whether the widget should be automatically opened after given time (without the visitor clicking it).</li>
+                            <li><code>Show widget automatically after (seconds)</code> - specifies the number of seconds after which widget should be automatically opened.</li>
+                            <li><code>Mobile version breakpoint</code> - This is the widget's containing page width in pixels below which mobile version of the widget is used. In other words - if containing page is smaller than this value, standard widget will be hidden and its mobile version will be used.</li>
+                            <li>
+                                <code>Maximum connections</code> - this option specifies the number of maximum guest chats opened simultaneously. For example, if the value is 10
+                                the 10 visitors will be able to chat with operators at the same time. This feature can help you reduce your server's power usage or adjust the
+                                maximum number of chats based on how many simultaneous talks you can handle. Guests that visit your
+                                page while the limit is met will be presented with the contact form view instead of the chat view. After currently chatting
+                                guests leave the chat, new visitors will be able to connect.
+                            </li>
+                        </ul>
+                        
+                        <p>This section is only available if logged in as the admin user.</p>
+                        
+                        <h3 id="usage-themes">Widget themes</h3>
+                        
+                        <div class="browser">
+                            <img src="inc/img/themes.png">
+                        </div>
+                        
+                        <p>
+                            Here, you can change the visual theme of the chatting widget. It will be immediately updated.
+                        </p>
+                        
+                        <h3 id="usage-widget-preview">Widget preview</h3>
+                        
+                        <p>
+                            Operators and administrator can preview the chatting widget at any moment by clicking the <code>Widget preview</code> item in the top-right menu (or
+                            eye icon on the left menu). This will result in opening the below page in a new browser tab. There, you can test widget's look and behavior:
+                        </p>
+
+                        <div class="browser">
+                            <img src="inc/img/widget-preview.png">
+                        </div>
+
+                        <h3 id="usage-operators">Operators</h3>
+                        
+                        <div class="browser">
+                            <img src="inc/img/operators.png">
+                        </div>
+                        
+                        <p>
+                            Next to the settings tab is the operators tab, which is used to manage all of the operators. You can add, remove or modify
+                            the users here. If you're logged in as an operator, you can change your own profile information. Additionally, passwords
+                            can be reset here and profile avatars selected/uploaded.
+                        </p>
+                        
+                        <p>
+                            <span class="label primary">
+                                Before you're allowed to chat with the visitors, you have to create at least one operator account and log in using it.
+                            </span>
+                            
+                            To create an operator go to <code>Operators</code> tab and click <code>Add new</code> button at the top. The following form will be shown:
+                        </p>
+                        
+                        <div class="browser">
+                            <img src="inc/img/operators-new.png">
+                        </div>
+                        
+                        <p>
+                            Fill the form with the operators data and click <code>Save</code>. The e-mail address you specify here will be used
+                            to log in with this operator's account. <span class="label primary">Important:</span> the <code>Password</code> field has to be filled with at least 6 characters.
+                        </p>
+                        
+                        <h3 id="usage-chatting">Chatting</h3>
+                        
+                        <p>
+                            <span class="label primary">
+                                Before you're allowed to chat with the visitors, you have to create at least one operator account and log in using it.
+                            </span>
+                            
+                            For more information go to <a href="#usage-operators">Operators</a> section.
+                        </p>
+                        
+                        <div class="browser">
+                            <img src="inc/img/operator-talks.png">
+                        </div>
+                        
+                        <p>
+                            <span class="label primary">
+                                For your visitors to be able to chat you have to be logged as an operator. Otherwise, the guests will only
+                                see a contact form fallback and not the chat login form.
+                            </span>
+                        </p>
+                        
+                        <p>
+                            The default section that's displayed after logging in as an operator is the chat view. All on-line users are listed on the left here (<code>Online users</code> and <code>Online operators</code> lists).
+                            If you move your mouse cursor over a user's name, you'll see a small popup with information about that user.
+                            You can either wait for incomming messages or click on the user's name and start a conversation yourself. When new messages arrive
+                            operators are notified with sound as well as blinking envelope icons next to the tab headers. After opening user's tab you can
+                            type your messages into the input on the bottom (<code>Write your message</code>) and press enter to send them. You can also use emoticons by clicking their symbol
+                            on the right of the input.
+                        </p>
+                        
+                        <p>
+                            <span class="label primary">
+                                Only one operator is allowed to talk with a guest at the same time. In case a second operator tries to send messages to the given
+                                guest, the system message will be displayed, informing the operator that the guest is already handled by someone else.
+                            </span>
+                        </p>
+                        
+                        <p>
+                            When talking with a guest, on top of the chat's view there's a live status of the page guest is currently visiting.
+                        </p>
+                        
+                        <p>
+                            Conversations between two operators are also possible - just click operator's name on the list of online operators.
+                        </p>
+
+                        <h3 id="guest-chatting">Guest chatting</h3>
+                        
+                        <img src="inc/img/guest-talks.png">
+                        
+                        <p>
+                            Guest chatting works in exactly the same way. Additionally, while chatting, guests can access a settings menu using the wrench icon
+                            on the title bar to update settings like emoticons usage, sound notification usage, auto scrolling the chat box and auto showing of the chat.
+                        </p>
+                        
+                        <img src="inc/img/guest-settings.png">
+                        
+                        <p>
+                            If a guest refreshes the web page, which holds the chat widget, he is still allowed to talk using the same session and any previous messages
+                            are displayed in the chatbox.
+                        </p>
+
+                        <h3 id="usage-canned">Canned messages</h3>
+                        
+                        <p>
+                            The application allows you to create a list of messages that can be quickly pasted into conversation with a visitor. You can manage them
+                            inside the <code>Canned messages</code> (only when logged in as the administrator user).
+                        </p>
+                        <p>
+                            <span class="label primary">Important:</span> You can use dynamic placeholders inside the canned message body. The following placeholders
+                            are available:
+
+                            <ul>
+                                <li><code>{name}</code> - when operator uses the message it will be replace by his actual name</li>
+                                <li><code>{mail}</code> - when operator uses the message it will be replace by his actual e-mail address</li>
+                            </ul>
+                        </p>
+                        
+                        <div class="browser">
+                            <img src="inc/img/canned-messages.png">
+                        </div>
+
+                        <p>
+                            To use canned messages, click the <code>Canned</code> button (on the left of the message input field) when talking to a guest. The following
+                            pop-up window will be displayed:
+                        </p>
+
+                        <div class="browser">
+                            <img src="inc/img/canned-messages-use.png">
+                        </div>
+
+                        <p>First select one of the messages by clicking on its text. Next, press <code>Insert</code> and the message will be placed inside your message input.</p>
+                        
+                        <h3 id="usage-history">History</h3>
+                        
+                        <div class="browser">
+                            <img src="inc/img/history.png">
+                        </div>
+                        
+                        <p>
+                            History section allows both admin and operators to browse and search through the whole conversation history. Leaving all
+                            of the filtering inputs empty will result in all of the talks being listed. To show a given conversation after it's found
+                            click the item on the results list under the search form and the talk will be displayed on the right. In the talk's view
+                            you can also see its participants profile information and talk's start/end date and time.
+                        </p>
+                        <p>
+                            <span class="label primary">Important:</span> If you notice the application slowing down, you might try clearing the history of messages
+                            by clicking <code>Clear history</code>.
+                        </p>
+                        
+                        <h3 id="usage-avatars">Adding more predefined avatars</h3>
+                        
+                        <p>
+                            In addition to uploading custom avatars, a predefined set of avatar images is available that both guest and operators can easily use.
+                            If you would like to modify the images available as predefined avatars, you just need to modify the contents of the
+                            <code>upload/default-avatars</code> directory. The application automatically iterates through all the avatars from this folder and
+                            makes them available in the chat.
+                        </p>
+                        
+                        <h3 id="usage-sound">Adding more message notification sounds</h3>
+                        
+                        <p>
+                            New message notification sounds played when new messages arrive can be found in <code>audio</code> directory. If you would like to
+                            use additional sounds for this purpose, just copy the MP3 files to this directory. The application will automatically load all of
+                            the new files and enable you to choose one of them using <code>New message sound</code> drop-down menu in admin's panel <code>Settings</code> tab.
+                        </p>
+
+                        <h3 id="usage-jsapi">JavaScript API</h3>
+                        
+                        <p>
+                            The widget exposes a JavaScript API to the page that contains it. This way you can interact with the widget using you own JavaScript code.
+                            The API can be accessed via the <code>phpLiveChat</code> global object.
+                        <p>
+                            <span class="label primary">Important: your custom JavaScript code has to be placed after the widget embedding script - otherwise, phpLiveChat global object will not be accessible.</span>
+                        </p>
+                        <p>
+                            Here is an example code presenting all of the available features:
+                        </p>
+
+<pre>
+// Show the widget
+phpLiveChat.show();
+
+// Turn on the full-screen mode
+phpLiveChat.fullscreenOn();
+
+// Turn off the full-screen mode
+phpLiveChat.fullscreenOff();
+
+// Hide the widget
+phpLiveChat.hide();
+
+// End the chat
+phpLiveChat.endChat();
+
+// Send a message to operator
+phpLiveChat.sendMessage('Hello! :)');
+
+// Execute custom code when operators are online
+phpLiveChat.onoperatorsonline = function()
+{
+    alert('Operators are online');
+};
+
+// Execute custom code when operators are offline
+phpLiveChat.onoperatorsoffline = function()
+{
+    alert('Operators are offline');
+};
+
+// Execute custom code when new message is received
+phpLiveChat.onmessage = function()
+{
+    alert('New message just arrived');
+};
+
+// Execute custom code when a visitor logs into the chat
+phpLiveChat.onloginsuccess = function()
+{
+    alert('Visitor started the chat');
+};
+
+// Execute custom code when a visitor ends the chat
+phpLiveChat.onlogoutsuccess = function()
+{
+    alert('Visitor finished the chat');
+};
+
+// Execute custom code when operator is typing
+phpLiveChat.onoperatortyping = function()
+{
+    alert('Operator is typing right now');
+};
+</pre>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
